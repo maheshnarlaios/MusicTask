@@ -8,15 +8,38 @@
 
 import UIKit
 import CoreData
+import AVKit
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    var player = AVPlayer()
     var window: UIWindow?
+    class func shared() -> AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+            
+        catch let error1
+        {
+            print("Error1----------"+"\(error1)");
+        }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        }
+        catch let error {
+            
+            print("Error 2--------------"+"\(error)");
+        }
+
+        
         return true
     }
 
